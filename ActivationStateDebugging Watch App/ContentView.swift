@@ -8,15 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @Environment(\.scenePhase) private var scenePhase
+    
     var body: some View {
+        
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            switch scenePhase {
+            case .background:
+                Text("Background")
+                    .font(.title2)
+                    .foregroundColor(.red)
+            case .inactive:
+                Text("Inactive")
+                    .font(.title2)
+                    .foregroundColor(.yellow)
+            case .active:
+                Text("Active")
+                    .font(.title2)
+                    .foregroundColor(.green)
+            @unknown default:
+                Text("?")
+            }
         }
-        .padding()
+        .onChange(of: scenePhase, initial: true, { oldState, newState in
+            print("scenePhase went from \(oldState) to \(newState)")
+        })
     }
+    
 }
 
 #Preview {
