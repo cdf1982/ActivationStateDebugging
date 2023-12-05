@@ -21,8 +21,11 @@ I prepared the simplest Xcode sample project for you to test, as described in "S
 
 Thank you for your help and ciao from Italy, Cesare
 
+### Update December 5, 2023
+The sample project has been updated to avoid using ScenePhase as conditional in the SwiftUI View body; it now shows the list of phases the app goes through, which can be useful to see the difference between **running it attached to Xcode (where, after launch, the app remains .active until it's sent to background manually by pressing a physical button)** and **_normally_ on device, where any wrist rotation or delay triggers a change from .active, .inactive and viceversa**.
+My purpose is to understand if it's possible to have the app run attached to Xcode debugger, but behaving in the way it does when used "in real life".
+
 ### Steps to reproduce
 1. Clone [sample project](https://github.com/cdf1982/ActivationStateDebugging):
-2.  Please run it on device from Xcode: you'll see the label on the Watch say "Active" all the time, no matter how long you wait interacting or if you rotate your wrist;
-3. Stop execution from Xcode and launch the app directly from the Watch: the .inactive state will be regularly triggered and displayed.
-
+2. Please run it on device from Xcode: the "Active" state will continue indefinetely, no matter how long you wait interacting or if you rotate your wrist;
+3. Stop execution from Xcode and launch the app directly from the Watch: the .inactive state will be regularly triggered and displayed when rotating the wrist or pausing interactions.

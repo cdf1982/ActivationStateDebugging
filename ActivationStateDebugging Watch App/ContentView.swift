@@ -11,31 +11,21 @@ struct ContentView: View {
     
     @Environment(\.scenePhase) private var scenePhase
     
+    @State var log = "01. app launch\n"
+    @State var counter = 1
+    
     var body: some View {
         
-        VStack {
-            switch scenePhase {
-            case .background:
-                Text("Background")
-                    .font(.title2)
-                    .foregroundColor(.red)
-            case .inactive:
-                Text("Inactive")
-                    .font(.title2)
-                    .foregroundColor(.yellow)
-            case .active:
-                Text("Active")
-                    .font(.title2)
-                    .foregroundColor(.green)
-            @unknown default:
-                Text("?")
-            }
+        ScrollView {
+            Text(log)
+                .font(.footnote)
+                .monospaced()
         }
         .onChange(of: scenePhase, initial: true, { oldState, newState in
-            print("scenePhase went from \(oldState) to \(newState)")
+            counter += 1
+            log = "\(String(format: "%02d", counter)). \(newState)\n\(log)"
         })
     }
-    
 }
 
 #Preview {
